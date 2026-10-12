@@ -14,14 +14,25 @@ int main(int argc, char **argv)
 	Harl harl;
 	const std::string level(argv[1]);
 	int levelIndex = -1;
-	if (level == "DEBUG")
-		levelIndex = 0;
-	else if (level == "INFO")
-		levelIndex = 1;
-	else if (level == "WARNING")
-		levelIndex = 2;
-	else if (level == "ERROR")
-		levelIndex = 3;
+
+	switch (level[0])
+	{
+		case 'D':
+			levelIndex = 0;
+			break;
+		case 'I':
+			levelIndex = 1;
+			break;
+		case 'W':
+			levelIndex = 2;
+			break;
+		case 'E':
+			levelIndex = 3;
+			break;
+		default:
+			levelIndex = -1;
+			break;
+	}
 
 	switch (levelIndex)
 	{

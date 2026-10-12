@@ -29,12 +29,22 @@ void Harl::error(void) const
 
 void Harl::complain(const std::string &level) const
 {
-	if (level == "DEBUG")
-		debug();
-	else if (level == "INFO")
-		info();
-	else if (level == "WARNING")
-		warning();
-	else if (level == "ERROR")
-		error();
+	const std::string levels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	typedef void (Harl::*ComplainFunction)(void) const;
+	ComplainFunction functions[] = {
+		&Harl::debug,
+		&Harl::info,
+		&Harl::warning,
+		&Harl::error
+	};
+
+	for (int i = 0; i < 4; ++i)
+	{
+		if (levels[i] == level)
+		{
+			(this->*functions[i])();
+			return;
+		}
+	}
+	std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
 }
