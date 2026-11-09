@@ -29,17 +29,3 @@ Brain& Brain::operator=(const Brain& other)
 	}
 	return *this;
 }
-
-const std::string& Brain::getIdea(int index) const
-{
-	if (index < 0 || index >= 100)
-		throw std::out_of_range("Brain idea index out of range");
-	return _ideas[index];
-}
-
-void Brain::setIdea(int index, const std::string& idea)
-{
-	if (index < 0 || index >= 100)
-		throw std::out_of_range("Brain idea index out of range");
-	_ideas[index] = idea;
-}
