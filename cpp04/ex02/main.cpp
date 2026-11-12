@@ -1,37 +1,20 @@
-#include "Animal.hpp"
-#include "Cat.hpp"
-#include "Dog.hpp"
-#include <iostream>
-
-// int main()
-// {
-// 	const Animal* j = new Dog();
-// 	const Animal* i = new Cat();
-// 	delete j; //should not create a leak
-// 	delete i;
-// 	//...
-// 	return (0);
-// }
+#include "Bureaucrat.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 int main()
 {
-	std::cout << "=== Polymorphism and deletion through Animal pointers ===\n";
-	Animal* animals[4];
-	animals[0] = new Dog();
-	animals[1] = new Cat();
-	animals[2] = new Dog();
-	animals[3] = new Cat();
+	Bureaucrat bureaucrat("Bureaucrat", 1);
+	ShrubberyCreationForm shrubbery("home");
+	RobotomyRequestForm robotomy("Bender");
+	PresidentialPardonForm pardon("Ford Prefect");
 
-	for (int i = 0; i < 4; ++i)
-	{
-		std::cout << animals[i]->getType() << std::endl;
-		animals[i]->makeSound();
-	}
-
-	for (int i = 0; i < 4; ++i)
-		delete animals[i];
-
-	//Animal animal; this does not work because Animal class is abstract now.
-
-	return (0);
+	bureaucrat.signForm(shrubbery);
+	bureaucrat.executeForm(shrubbery);
+	bureaucrat.signForm(robotomy);
+	bureaucrat.executeForm(robotomy);
+	bureaucrat.signForm(pardon);
+	bureaucrat.executeForm(pardon);
+	return 0;
 }

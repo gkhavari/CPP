@@ -4,10 +4,8 @@ CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Wpedantic
 
 SRCS =	main.cpp \
-		Animal.cpp \
-		Brain.cpp \
-		Cat.cpp \
-		Dog.cpp \
+		Bureaucrat.cpp \
+		Form.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 

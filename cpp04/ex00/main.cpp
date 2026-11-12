@@ -1,71 +1,95 @@
-#include "Animal.hpp"
-#include "WrongAnimal.hpp"
-#include "Cat.hpp"
-#include "WrongCat.hpp"
-#include "Dog.hpp"
-#include <iostream>
+#include "Bureaucrat.hpp"
 
-// int main()
-// {
-// 	const Animal* meta = new Animal();
-// 	const Animal* j = new Dog();
-// 	const Animal* i = new Cat();
-// 	std::cout << j->getType() << " " << std::endl;
-// 	std::cout << i->getType() << " " << std::endl;
-// 	i->makeSound(); //will output the cat sound!
-// 	j->makeSound();
-// 	meta->makeSound();
-// //...
-// 	return(0);
-// }
+#include <iostream>
+#include <string>
+
+static void runTests()
+{
+	
+	std::cout << "\n=== Creating a bureaucrat called Alice of grade 3 ===\n";
+	Bureaucrat mid("Alice", 3);
+	std::cout << "Created: " << mid << std::endl;
+	std::cout << "Bureaucrat name: " << mid.getName() << std::endl;
+	std::cout << "Bureaucrat grade: " << mid.getGrade() << std::endl;
+
+
+	std::cout << "\n=== Checking incrementing and decrementing grade ===\n";
+	std::cout << "Increment grade: " << mid.getGrade() << " -> ";
+	mid.incrementGrade();
+	std::cout << mid.getGrade() << std::endl;
+	std::cout << "Decrement grade: " << mid.getGrade() << " -> ";
+	mid.decrementGrade();
+	std::cout << mid.getGrade() << std::endl;
+	
+	
+	std::cout << "\n=== Check top and bottom grade ===\n";
+	Bureaucrat highest("Top", 1);
+	std::cout << "Created: " << highest << std::endl;
+	Bureaucrat lowest("Bottom", 150);
+	std::cout << "Created: " << lowest << std::endl;
+	std::cout << "Try to increment Top's grade: " << highest.getGrade() << " -> ";
+	try
+	{
+		highest.incrementGrade();
+		std::cout << highest.getGrade() << std::endl;
+	}
+	catch(std::exception & e)
+	{
+		std::cout << highest.getGrade() << std::endl;
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
+	std::cout << "Try to decrement Bottoms's grade: " << lowest.getGrade() << " -> ";
+	try
+	{
+		lowest.decrementGrade();
+		std::cout << lowest.getGrade() << std::endl;
+	}
+	catch(std::exception & e)
+	{
+		std::cout << lowest.getGrade() << std::endl;
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
+	
+	
+	std::cout << "\n=== Using invalid grade ===\n";
+	std::cout << "Try grade 0" << std::endl;
+	try
+	{
+		Bureaucrat invalid("Too high", 0);
+	}
+	catch(std::exception & e)
+	{
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
+	std::cout << "Try grade 151" << std::endl;
+	try
+	{
+		Bureaucrat invalid("Too low", 151);
+	}
+	catch(std::exception & e)
+	{
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
+	
+
+	std::cout << "\n=== Testing copy constructor ===\n";
+	std::cout << "Original: " << mid << std::endl;
+	Bureaucrat copied(mid);
+	std::cout << "Copy    : " << copied << std::endl;
+
+
+	std::cout << "\n=== Testing copy assignment operator ===\n";
+	Bureaucrat assigned("Bob", 10);
+	std::cout << mid << std::endl;
+	std::cout << assigned << std::endl;
+	std::cout << "Bob = Alice" << std::endl;
+	assigned = mid;
+	std::cout << mid << std::endl;
+	std::cout << assigned << std::endl;
+}
 
 int main()
 {
-	const int animalCount = 4;
-	Animal* animals[animalCount];
-
-	animals[0] = new Dog();
-	animals[1] = new Cat();
-	animals[2] = new Dog();
-	animals[3] = new Cat();
-
-	std::cout << "\n=== Types and sounds through Animal pointers ===\n";
-	for (int i = 0; i < animalCount; ++i)
-	{
-		std::cout << "Type: " << animals[i]->getType() << std::endl;
-		animals[i]->makeSound();
-	}
-
-	std::cout << "\n=== Plain Animal sound ===\n";
-	Animal animal;
-	animal.makeSound();
-
-	std::cout << "\n=== Destroying animals through Animal pointers ===\n";
-	for (int i = 0; i < animalCount; ++i)
-		delete animals[i];
-
-	std::cout << "\n=== Now testing with WrongAnimal, and wrong Cat, where the makeSound function is not virtual ===\n";
-	const int wrongAnimalCount = 2;
-	WrongAnimal* wrongAnimals[wrongAnimalCount];
-
-	wrongAnimals[0] = new WrongCat();
-	wrongAnimals[1] = new WrongCat();
-
-	std::cout << "\n=== Types and sounds through WrongAnimal pointers ===\n";
-	for (int i = 0; i < wrongAnimalCount; ++i)
-	{
-		std::cout << "Type: " << wrongAnimals[i]->getType() << std::endl;
-		wrongAnimals[i]->makeSound();
-	}
-
-	std::cout << "\n=== Plain WrongAnimal sound ===\n";
-	WrongAnimal wrongAnimal;
-	wrongAnimal.makeSound();
-
-	std::cout << "\n=== Destroying WrongAnimals through WrongAnimal pointers ===\n";
-	for (int i = 0; i < wrongAnimalCount; ++i)
-		delete wrongAnimals[i];
-	std::cout << "\n=== Stack Wronganimal gets destroyed automatically ===\n";
-	std::cout << "=== Stack animal gets destroyed automatically ===\n";
-	return 0;
+	runTests();
+	return (0);
 }
